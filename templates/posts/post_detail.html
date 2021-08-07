@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Post-detail
+{% endblock %}
+
+{% block content %}
+
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text">{{post.body}}</p>
+            {% if request.user.is_authenticated and not request.user.role == 'person' %}
+                <a href="{% url 'post_update_url' id=post.id %}" class="btn btn-primary">Редактировать</a>
+                <a href="{% url 'post_delete_url' id=post.id %}" class="btn btn-danger">Удалить</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
